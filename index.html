@@ -128,7 +128,7 @@
     <div id="login-overlay">
         <div class="login-box">
             <div class="login-title">🔒 Protected Document</div>
-            <div class="login-subtitle">Enter password to view Positive Partnerships Requirements</div>
+            <div class="login-subtitle">Enter password to view document.</div>
             <input type="password" id="password-input" class="password-input" placeholder="Enter Password" onkeyup="if(event.key === 'Enter') checkPassword()">
             <button class="unlock-btn" onclick="checkPassword()">Unlock Dashboard</button>
             <div id="error-msg" class="error-msg">Incorrect password. Please try again.</div>
@@ -186,7 +186,7 @@
         const errorMsg = document.getElementById('error-msg');
 
         // SET YOUR PASSWORD HERE
-        const correctPassword = "Phase5Ready";
+        const correctPassword = "PopTheSock";
 
         if (input === correctPassword) {
             document.getElementById('login-overlay').style.display = 'none';

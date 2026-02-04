@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positive Partnerships | Secured Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-primary: #1f2937;
+            --primary-color: #2563eb;
+            --border-radius: 12px;
+            --font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- LOGIN OVERLAY --- */
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(248, 249, 250, 0.98);
+            backdrop-filter: blur(5px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #e5e7eb;
+        }
+
+        .login-title { font-size: 1.5rem; margin-bottom: 0.5rem; color: #111827; font-weight: 700; }
+        .login-subtitle { color: #6b7280; margin-bottom: 1.5rem; font-size: 0.95rem; }
+
+        .password-input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            transition: border 0.2s;
+        }
+        .password-input:focus { border-color: var(--primary-color); outline: none; }
+
+        .unlock-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .unlock-btn:hover { background-color: #1d4ed8; }
+
+        .error-msg { color: #ef4444; font-size: 0.85rem; margin-top: 1rem; display: none; }
+
+        /* --- DASHBOARD CONTENT (Hidden by default) --- */
+        #main-dashboard { display: none; }
+
+        /* ... [Previous CSS for Dashboard] ... */
+        header { background: white; padding: 2rem 5%; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        h1 { margin: 0; font-size: 1.5rem; color: #111827; }
+        .subtitle { color: #6b7280; font-size: 0.9rem; margin-top: 0.25rem; }
+        .dashboard-stats { display: flex; gap: 1.5rem; }
+        .stat-card { background: white; padding: 0.75rem 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; text-align: center; }
+        .stat-number { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); display: block; }
+        .stat-label { font-size: 0.8rem; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
+        .controls { padding: 1.5rem 5%; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; position: sticky; top: 0; background: rgba(248, 249, 250, 0.9); z-index: 100; border-bottom: 1px solid #e5e7eb; backdrop-filter: blur(8px); }
+        .search-box { flex: 1; min-width: 250px; position: relative; }
+        .search-input { width: 100%; padding: 0.75rem 1rem 0.75rem 2.5rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; }
+        .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+        .filter-group { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 5px; }
+        .filter-btn { padding: 0.5rem 1rem; border: 1px solid #d1d5db; background: white; border-radius: 20px; cursor: pointer; font-size: 0.9rem; white-space: nowrap; transition: all 0.2s; }
+        .filter-btn:hover { background-color: #f3f4f6; }
+        .filter-btn.active { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+        .export-btn { margin-left: auto; background: white; border: 1px solid #d1d5db; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; color: #6b7280; }
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; padding: 0 5% 3rem 5%; }
+        .card { background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 1.5rem; display: flex; flex-direction: column; border-left: 5px solid #ccc; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-2px); }
+        .card[data-category="Reporting & Planning"] { border-left-color: #3b82f6; }
+        .card[data-category="Service Delivery Targets"] { border-left-color: #10b981; }
+        .card[data-category="IT & Website"] { border-left-color: #8b5cf6; }
+        .card[data-category="Financial & Admin"] { border-left-color: #f59e0b; }
+        .card[data-category="Staffing & Legal"] { border-left-color: #ef4444; }
+        .card-header { display: flex; justify-content: space-between; margin-bottom: 0.75rem; align-items: flex-start; }
+        .badge { font-size: 0.75rem; padding: 0.25rem 0.75rem; border-radius: 12px; font-weight: 600; background-color: #f3f4f6; color: #4b5563; }
+        .req-id { font-size: 0.8rem; color: #9ca3af; font-family: monospace; }
+        .card-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #111827; }
+        .card-details { font-size: 0.95rem; color: #4b5563; margin-bottom: 1rem; flex-grow: 1; }
+        .meta-info { background: #f9fafb; padding: 0.75rem; border-radius: 8px; font-size: 0.85rem; margin-bottom: 1rem; }
+        .meta-row { display: flex; margin-bottom: 0.25rem; }
+        .meta-label { font-weight: 600; width: 80px; flex-shrink: 0; color: #6b7280; }
+        .meta-val { color: #111827; }
+        .card-footer { margin-top: auto; border-top: 1px solid #f3f4f6; padding-top: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .status-select { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: 1px solid transparent; outline: none; transition: all 0.2s; }
+        .status-todo { background-color: #f3f4f6; color: #6b7280; border-color: #d1d5db; }
+        .status-progress { background-color: #dbeafe; color: #1e40af; border-color: #93c5fd; }
+        .status-done { background-color: #d1fae5; color: #065f46; border-color: #6ee7b7; }
+        .source-link { font-size: 0.75rem; color: #9ca3af; text-decoration: none; }
+        .source-link:hover { text-decoration: underline; }
+        .no-results { text-align: center; width: 100%; grid-column: 1 / -1; padding: 3rem; color: #6b7280; }
+    </style>
+</head>
+<body>
+
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="login-title">🔒 Protected Document</div>
+            <div class="login-subtitle">Enter password to view Positive Partnerships Requirements</div>
+            <input type="password" id="password-input" class="password-input" placeholder="Enter Password" onkeyup="if(event.key === 'Enter') checkPassword()">
+            <button class="unlock-btn" onclick="checkPassword()">Unlock Dashboard</button>
+            <div id="error-msg" class="error-msg">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
+    <div id="main-dashboard">
+        <header>
+            <div>
+                <h1>Positive Partnerships | Requirements Matrix</h1>
+                <div class="subtitle">Contract Phase 5 & RFT Analysis</div>
+            </div>
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="total-count">0</span>
+                    <span class="stat-label">Total Items</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="done-count" style="color: #10b981">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" id="progress-percent">0%</span>
+                    <span class="stat-label">Progress</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" class="search-input" placeholder="Search requirements (e.g., 'Website', 'Invoice')...">
+            </div>
+
+            <div class="filter-group" id="category-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Service Delivery Targets">Targets</button>
+                <button class="filter-btn" data-filter="Reporting & Planning">Reporting</button>
+                <button class="filter-btn" data-filter="IT & Website">IT / Web</button>
+                <button class="filter-btn" data-filter="Financial & Admin">Financial</button>
+                <button class="filter-btn" data-filter="Staffing & Legal">Staffing</button>
+            </div>
+
+            <button class="export-btn" onclick="exportToCSV()">📥 Export CSV</button>
+        </div>
+
+        <div id="grid-container" class="grid-container">
+            </div>
+    </div>
+
+<script>
+    // --- PASSWORD LOGIC ---
+    function checkPassword() {
+        const input = document.getElementById('password-input').value;
+        const errorMsg = document.getElementById('error-msg');
+
+        // SET YOUR PASSWORD HERE
+        const correctPassword = "Phase5Ready";
+
+        if (input === correctPassword) {
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('main-dashboard').style.display = 'block';
+            // Trigger render to ensure layout is correct
+            renderCards();
+        } else {
+            errorMsg.style.display = 'block';
+            document.getElementById('password-input').value = '';
+        }
+    }
+
+    // --- DATA SET ---
+    const requirements = [
+        {"id": "REQ-001", "category": "Reporting & Planning", "title": "Transition-in Plan (Draft & Final)", "deadline": "Commencement Meeting", "source": "RFT Schedule 1 B.1.139", "details": "Submit Draft at Commencement Meeting. Final version due within 10 days. Must outline transition strategy, MVP website development, staffing, and resources.", "status": "todo"},
+        {"id": "REQ-002", "category": "Reporting & Planning", "title": "Annual Program Delivery Plan", "deadline": "30 April (Annually)", "source": "RFT Schedule 1 B.1.153", "details": "First draft due 90 days after start. Includes Program Schedule, Data/Performance Plan, Stakeholder Plan, Quality Plan, Risk Register.", "status": "todo"},
+        {"id": "REQ-003", "category": "Reporting & Planning", "title": "Quarterly Progress Reports", "deadline": "20 days after Qtr End", "source": "RFT Schedule 1 B.1.128", "details": "Must cover progress against plan, milestones, risks, financials, and IP updates.", "status": "todo"},
+        {"id": "REQ-004", "category": "Reporting & Planning", "title": "Annual Report", "deadline": "20 July (Annually)", "source": "RFT Schedule 1 B.1.128", "details": "Summary of annual performance, financial acquittal, and updated plans for next year.", "status": "todo"},
+        {"id": "REQ-005", "category": "Reporting & Planning", "title": "Indigenous Participation Report", "deadline": "Quarterly & End of Term", "source": "Contract Clause 22", "details": "Report via IPPRS on compliance with Indigenous Participation Plan and MMR targets.", "status": "todo"},
+        {"id": "REQ-006", "category": "Reporting & Planning", "title": "Final Report", "deadline": "60 days post-contract", "source": "RFT Schedule 1 B.1.135", "details": "Comprehensive summary of entire contract period performance.", "status": "todo"},
+        {"id": "REQ-008", "category": "Service Delivery Targets", "title": "Teacher/Staff PL Target", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Deliver professional learning to 12,000 teachers, principals, and school staff annually.", "status": "todo"},
+        {"id": "REQ-009", "category": "Service Delivery Targets", "title": "Parent/Carer Workshop Target", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Deliver workshops to 3,000 parents and carers annually.", "status": "todo"},
+        {"id": "REQ-010", "category": "Service Delivery Targets", "title": "Whole School Engagement", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Engage 15 schools in Year 1; 20 schools/year thereafter. Must include min 3 workshops per school + 12 months support.", "status": "todo"},
+        {"id": "REQ-011", "category": "Service Delivery Targets", "title": "First Nations Training", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Minimum 10 sessions. At least 60% must be held in regional/remote locations.", "status": "todo"},
+        {"id": "REQ-012", "category": "Service Delivery Targets", "title": "ACCO Partnerships", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Formal agreements with minimum 2 Aboriginal Community-Controlled Organisations.", "status": "todo"},
+        {"id": "REQ-013", "category": "Service Delivery Targets", "title": "CALD Workshops", "deadline": "Annual Target", "source": "RFT Attachment A", "details": "Minimum 10 targeted sessions for CALD communities.", "status": "todo"},
+        {"id": "REQ-014", "category": "IT & Website", "title": "Launch Website MVP", "deadline": "30 June 2026", "source": "RFT Schedule 1 B.1.136", "details": "Must include core resources, foundational training modules, and registration functionality.", "status": "todo"},
+        {"id": "REQ-015", "category": "IT & Website", "title": "Full Website Release", "deadline": "31 December 2026", "source": "RFT Schedule 1 Milestones", "details": "All planned features live. 99.95% uptime requirement. Hosted in Australia.", "status": "todo"},
+        {"id": "REQ-016", "category": "IT & Website", "title": "Website Accessibility", "deadline": "Ongoing", "source": "Contract Clause 28.2", "details": "Must comply with WCAG 2.1 Level AA and Digital Service Standards.", "status": "todo"},
+        {"id": "REQ-017", "category": "IT & Website", "title": "Resource Translation", "deadline": "Ongoing", "source": "RFT Schedule 1 B.1.119", "details": "Translate frequently accessed resources into at least 15 community languages.", "status": "todo"},
+        {"id": "REQ-018", "category": "IT & Website", "title": "Cyber Security Compliance", "deadline": "Ongoing", "source": "Contract Clause 10", "details": "Comply with PSPF, ISM, Essential Eight. No offshore data storage without prior approval.", "status": "todo"},
+        {"id": "REQ-019", "category": "Financial & Admin", "title": "Submit Invoices", "deadline": "20 days post-milestone", "source": "Contract Schedule 1 Item 6", "details": "Must include Tax Invoice requirements and certification of payment to subcontractors/personnel.", "status": "todo"},
+        {"id": "REQ-020", "category": "Financial & Admin", "title": "Maintain Insurance", "deadline": "Ongoing", "source": "Contract Schedule 1 Item 20", "details": "Public Liability ($10M), Professional Indemnity ($5M), Workers Comp.", "status": "todo"},
+        {"id": "REQ-021", "category": "Financial & Admin", "title": "Participant Travel Costs", "deadline": "As incurred", "source": "RFT Schedule 1 B.1.123", "details": "Pay for rural/remote school staff travel if employer funding unavailable. Do NOT pay for parents.", "status": "todo"},
+        {"id": "REQ-022", "category": "Financial & Admin", "title": "Statement of Tax Record", "deadline": "Ongoing", "source": "Contract Clause 24", "details": "Maintain Valid and Satisfactory STR. Ensure subs >$4M also hold one.", "status": "todo"},
+        {"id": "REQ-023", "category": "Staffing & Legal", "title": "Working with Children Checks", "deadline": "Ongoing", "source": "Contract Clause 28.3", "details": "Mandatory for all personnel interacting with children.", "status": "todo"},
+        {"id": "REQ-024", "category": "Staffing & Legal", "title": "Fraud Control Plan", "deadline": "1 month from start", "source": "Contract Schedule 1 Item 19", "details": "Consistent with Commonwealth Fraud Control Framework.", "status": "todo"},
+        {"id": "REQ-025", "category": "Staffing & Legal", "title": "Conflict of Interest", "deadline": "Immediate Notification", "source": "Contract Clause 28.9", "details": "Notify Dept immediately if any conflict arises. Maintain register.", "status": "todo"},
+        {"id": "REQ-026", "category": "Staffing & Legal", "title": "IP Register", "deadline": "Quarterly", "source": "RFT Schedule 1 B.1.171", "details": "Maintain register of all Contract Material and Existing Material.", "status": "todo"}
+    ];
+
+    // --- APP LOGIC ---
+    function loadStatus() {
+        const saved = localStorage.getItem('pp_req_status');
+        if (saved) {
+            const statusMap = JSON.parse(saved);
+            requirements.forEach(req => {
+                if (statusMap[req.id]) {
+                    req.status = statusMap[req.id];
+                }
+            });
+        }
+    }
+
+    function saveStatus() {
+        const statusMap = {};
+        requirements.forEach(req => statusMap[req.id] = req.status);
+        localStorage.setItem('pp_req_status', JSON.stringify(statusMap));
+        updateStats();
+    }
+
+    function renderCards(filterText = '', filterCategory = 'all') {
+        const container = document.getElementById('grid-container');
+        container.innerHTML = '';
+        const filtered = requirements.filter(req => {
+            const matchesText = (req.title + req.details + req.id).toLowerCase().includes(filterText.toLowerCase());
+            const matchesCategory = filterCategory === 'all' || req.category === filterCategory;
+            return matchesText && matchesCategory;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = '<div class="no-results">No requirements found matching your criteria.</div>';
+            return;
+        }
+
+        filtered.forEach(req => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.setAttribute('data-category', req.category);
+            card.innerHTML = `
+                <div class="card-header"><span class="badge">${req.category}</span><span class="req-id">${req.id}</span></div>
+                <h3 class="card-title">${req.title}</h3>
+                <div class="meta-info"><div class="meta-row"><span class="meta-label">Deadline:</span><span class="meta-val">${req.deadline}</span></div></div>
+                <div class="card-details">${req.details}</div>
+                <div class="card-footer">
+                    <a href="#" class="source-link">Src: ${req.source}</a>
+                    <select class="status-select status-${req.status}" onchange="updateStatus('${req.id}', this.value)">
+                        <option value="todo" ${req.status === 'todo' ? 'selected' : ''}>To Do</option>
+                        <option value="progress" ${req.status === 'progress' ? 'selected' : ''}>In Progress</option>
+                        <option value="done" ${req.status === 'done' ? 'selected' : ''}>Done</option>
+                    </select>
+                </div>
+            `;
+            container.appendChild(card);
+        });
+        updateStats();
+    }
+
+    window.updateStatus = function(id, newStatus) {
+        const req = requirements.find(r => r.id === id);
+        if (req) {
+            req.status = newStatus;
+            saveStatus();
+            const selectEl = document.querySelector(`select[onchange="updateStatus('${id}', this.value)"]`);
+            if(selectEl) selectEl.className = `status-select status-${newStatus}`;
+            updateStats();
+        }
+    };
+
+    function updateStats() {
+        const total = requirements.length;
+        const done = requirements.filter(r => r.status === 'done').length;
+        const percent = Math.round((done / total) * 100);
+        document.getElementById('total-count').textContent = total;
+        document.getElementById('done-count').textContent = done;
+        document.getElementById('progress-percent').textContent = percent + '%';
+    }
+
+    window.exportToCSV = function() {
+        let csv = 'ID,Category,Title,Deadline,Details,Source,Status\n';
+        requirements.forEach(req => {
+            const row = [req.id, `"${req.category}"`, `"${req.title}"`, `"${req.deadline}"`, `"${req.details.replace(/"/g, '""')}"`, req.source, req.status];
+            csv += row.join(',') + '\n';
+        });
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Positive_Partnerships_Requirements_Status.csv';
+        a.click();
+    };
+
+    // Listeners
+    document.getElementById('search-input').addEventListener('input', (e) => {
+        const activeCat = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        renderCards(e.target.value, activeCat);
+    });
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCards(document.getElementById('search-input').value, btn.getAttribute('data-filter'));
+        });
+    });
+
+    // Run
+    loadStatus();
+    // Do not run renderCards() immediately; wait for login
+</script>
+
+</body>
+</html>

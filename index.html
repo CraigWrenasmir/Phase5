@@ -1,493 +1,489 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phase 5 Positive Partnerships - Complete Project Scope</title>
-    <style>
-        :root {
-            --primary: #003366;
-            --secondary: #006699;
-            --accent: #e67e22;
-            --success: #27ae60;
-            --bg: #f4f7f9;
-            --text: #333;
-            --border: #d1d8e0;
-        }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
-        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-        
-        header { background: var(--primary); color: white; padding: 30px; text-align: center; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        header h1 { margin: 0; font-size: 2.2em; }
-        header p { margin: 10px 0 0; font-size: 1.1em; opacity: 0.9; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Positive Partnerships — Phase 5 Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+/* ───────── RESET & TOKENS ───────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pp-purple:#712D90;
+  --pp-deep:#431B56;
+  --pp-slate:#6A869E;
+  --pp-orange:#F7941E;
+  --pp-green:#BBD64A;
+  --pp-cream:#FAF8F5;
+  --pp-warm-white:#FFFFFF;
+  --pp-text:#2D2A32;
+  --pp-text-light:#5C5766;
+  --pp-border:rgba(113,45,144,0.1);
+  --font-display:'Fraunces',Georgia,serif;
+  --font-body:'DM Sans',system-ui,-apple-system,sans-serif;
+  --space-xs:0.5rem;--space-sm:1rem;--space-md:1.5rem;--space-lg:3rem;--space-xl:5rem;--space-2xl:8rem;
+  --radius:10px;--radius-lg:20px;
+  --max-w:1180px;
+}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);color:var(--pp-text);background:var(--pp-cream);line-height:1.65;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--pp-purple);text-decoration:none}
 
-        .summary-ribbon { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .stat-card { background: white; padding: 15px; border-radius: 8px; border-left: 5px solid var(--accent); box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
-        .stat-card .val { font-size: 1.8em; font-weight: bold; color: var(--primary); display: block; }
-        .stat-card .lbl { font-size: 0.9em; color: #666; text-transform: uppercase; }
+/* ───────── UTILITIES ───────── */
+.container{width:min(var(--max-w),92vw);margin-inline:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:none}
 
-        .tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 20px; }
-        .tab { padding: 12px 25px; cursor: pointer; font-weight: bold; color: #666; transition: all 0.3s; }
-        .tab.active { color: var(--primary); border-bottom: 4px solid var(--primary); background: rgba(0,51,102,0.05); }
-        .tab:hover { color: var(--primary); }
+/* ───────── NAV ───────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,248,245,0.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--pp-border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 24px rgba(67,27,86,0.08)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{height:36px;width:auto}
+.nav-links{display:flex;gap:var(--space-md);list-style:none}
+.nav-links a{font-size:0.85rem;font-weight:500;color:var(--pp-text-light);letter-spacing:0.02em;transition:color .25s}
+.nav-links a:hover,.nav-links a:focus{color:var(--pp-purple)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:6px}
+.nav-toggle svg{width:26px;height:26px;stroke:var(--pp-text);stroke-width:2;fill:none}
 
-        .section { display: none; animation: fadeIn 0.4s; }
-        .section.active { display: block; }
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:rgba(250,248,245,0.98);backdrop-filter:blur(14px);padding:var(--space-md);gap:var(--space-sm);border-bottom:1px solid var(--pp-border)}
+  .nav-links.open{display:flex}
+  .nav-toggle{display:block}
+}
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* ───────── HERO ───────── */
+.hero{position:relative;min-height:92vh;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:64px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(67,27,86,0.88) 0%,rgba(113,45,144,0.82) 40%,rgba(106,134,158,0.7) 100%);z-index:1}
+.hero-grain{position:absolute;inset:0;z-index:2;opacity:0.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.hero-content{position:relative;z-index:3;text-align:center;padding:var(--space-xl) var(--space-md);max-width:780px}
+.hero-brand{font-family:var(--font-body);font-size:clamp(1.1rem,2vw,1.4rem);font-weight:300;color:rgba(255,255,255,0.85);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:var(--space-sm)}
+.hero h1{font-family:var(--font-display);font-weight:700;font-size:clamp(2.4rem,5vw,4rem);color:#fff;line-height:1.15;margin-bottom:var(--space-md);letter-spacing:-0.02em}
+.hero h1 span{display:block;font-weight:300;font-style:italic;font-size:0.55em;opacity:0.85;margin-top:0.4em;letter-spacing:0}
+.hero-subtitle{font-size:clamp(1rem,1.8vw,1.2rem);color:rgba(255,255,255,0.85);max-width:580px;margin:0 auto var(--space-lg);line-height:1.7}
+.hero-arrow{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border:2px solid rgba(255,255,255,0.35);border-radius:50%;color:#fff;transition:border-color .3s,transform .3s;animation:float 3s ease-in-out infinite}
+.hero-arrow:hover{border-color:#fff;transform:scale(1.08)}
+.hero-arrow svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
-        /* Scope Cards */
-        .scope-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; }
-        .scope-card { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .scope-header { background: var(--secondary); color: white; padding: 15px; font-weight: bold; font-size: 1.1em; }
-        .scope-body { padding: 20px; }
-        .scope-body h4 { margin: 15px 0 5px; color: var(--primary); border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .scope-body ul { padding-left: 20px; margin: 0; }
-        .scope-body li { margin-bottom: 8px; font-size: 0.95em; }
-        .tag { display: inline-block; background: #eef2f7; color: var(--secondary); padding: 3px 10px; border-radius: 15px; font-size: 0.85em; margin-bottom: 10px; font-weight: 600; }
+/* ───────── SECTION FRAMEWORK ───────── */
+section{padding:var(--space-xl) 0}
+section:nth-child(even){background:var(--pp-warm-white)}
+.section-label{font-family:var(--font-body);font-size:0.75rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--pp-purple);margin-bottom:var(--space-sm);display:flex;align-items:center;gap:0.6rem}
+.section-label::before{content:'';display:block;width:28px;height:2px;background:var(--pp-purple);border-radius:2px}
+.section-title{font-family:var(--font-display);font-weight:700;font-size:clamp(1.8rem,3.5vw,2.6rem);line-height:1.2;color:var(--pp-deep);margin-bottom:var(--space-md);letter-spacing:-0.015em;max-width:620px}
+.section-prose{font-size:1.05rem;color:var(--pp-text-light);max-width:620px;line-height:1.75}
+.section-prose + .section-prose{margin-top:var(--space-sm)}
 
-        /* Table Styles */
-        .req-table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .req-table th { background: var(--primary); color: white; text-align: left; padding: 12px 15px; font-size: 0.9em; }
-        .req-table td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 0.9em; vertical-align: top; }
-        .req-table tr:hover { background: #f9fbff; }
-        .cat-tag { padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: bold; text-transform: uppercase; }
-        .cat-report { background: #d1ecf1; color: #0c5460; }
-        .cat-staff { background: #d4edda; color: #155724; }
-        .cat-financial { background: #fff3cd; color: #856404; }
+/* ───────── INTRO ───────── */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center}
+.intro-img-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3}
+.intro-img-wrap img{width:100%;height:100%;object-fit:cover}
+.intro-img-accent{position:absolute;bottom:-12px;right:-12px;width:140px;height:140px;background:var(--pp-green);border-radius:var(--radius-lg);opacity:0.25;z-index:-1}
+@media(max-width:768px){.intro-grid{grid-template-columns:1fr;gap:var(--space-lg)}}
 
-        .search-bar { margin-bottom: 20px; display: flex; gap: 10px; }
-        .search-bar input { flex: 1; padding: 10px 15px; border: 1px solid var(--border); border-radius: 6px; }
+/* ───────── LEARNING MODEL (3 stages) ───────── */
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-md);margin-top:var(--space-lg)}
+.stage-card{background:var(--pp-warm-white);border:1px solid var(--pp-border);border-radius:var(--radius-lg);padding:var(--space-lg) var(--space-md);position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s}
+.stage-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(67,27,86,0.08)}
+.stage-number{font-family:var(--font-display);font-weight:700;font-size:3.5rem;color:var(--pp-purple);opacity:0.1;position:absolute;top:12px;right:20px;line-height:1}
+.stage-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-md)}
+.stage-icon svg{width:24px;height:24px;stroke-width:1.5}
+.stage-icon.pre{background:rgba(187,214,74,0.15);color:var(--pp-green)}
+.stage-icon.pre svg{stroke:#7a9c00}
+.stage-icon.work{background:rgba(113,45,144,0.1);color:var(--pp-purple)}
+.stage-icon.work svg{stroke:var(--pp-purple)}
+.stage-icon.post{background:rgba(247,148,30,0.12);color:var(--pp-orange)}
+.stage-icon.post svg{stroke:var(--pp-orange)}
+.stage-card h3{font-family:var(--font-display);font-weight:600;font-size:1.3rem;margin-bottom:0.6rem;color:var(--pp-deep)}
+.stage-card p{font-size:0.95rem;color:var(--pp-text-light);line-height:1.65}
+.stage-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--space-sm)}
+.stage-tag{font-size:0.78rem;font-weight:500;padding:4px 12px;border-radius:50px;background:rgba(113,45,144,0.07);color:var(--pp-purple)}
+.stage-img{margin-top:var(--space-md);border-radius:var(--radius);overflow:hidden;aspect-ratio:16/9}
+.stage-img img{width:100%;height:100%;object-fit:cover}
+@media(max-width:900px){.stages{grid-template-columns:1fr}}
 
-        .milestone-date { font-weight: bold; color: var(--accent); }
-        .scope-controls { display: flex; justify-content: flex-end; margin-bottom: 14px; }
-        .scope-toolbar { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
-        .view-toggle {
-            border: 1px solid var(--primary);
-            background: white;
-            color: var(--primary);
-            padding: 10px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-        .view-toggle:hover { background: #eef4fa; }
-        .constellation-wrap {
-            display: none;
-            background: radial-gradient(circle at 30% 20%, #0f2b4a 0%, #081a2e 70%);
-            border-radius: 10px;
-            border: 1px solid #14385f;
-            min-height: 680px;
-            position: relative;
-            overflow: hidden;
-        }
-        .constellation-wrap.active { display: block; }
-        .constellation-caption {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            color: #d7e7ff;
-            font-size: 0.9em;
-            background: rgba(8, 26, 46, 0.7);
-            border: 1px solid rgba(215, 231, 255, 0.25);
-            border-radius: 6px;
-            padding: 8px 10px;
-            z-index: 2;
-        }
-        #constellationSvg { width: 100%; height: 680px; display: block; }
-        .constellation-link {
-            stroke: rgba(183, 215, 255, 0.42);
-            stroke-width: 1.6;
-        }
-        .constellation-link.secondary {
-            stroke: rgba(183, 215, 255, 0.25);
-            stroke-dasharray: 2 4;
-        }
-        .node circle {
-            stroke: rgba(255, 255, 255, 0.65);
-            stroke-width: 1.5;
-        }
-        .node text {
-            fill: #e8f2ff;
-            font-size: 11px;
-            font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
-            pointer-events: none;
-        }
-        .node.core text { font-size: 14px; font-weight: 700; }
-        .node.service text { font-size: 12px; font-weight: 700; }
-        .scope-grid.hidden { display: none; }
-        .constellation-filters {
-            display: none;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px;
-            gap: 8px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .constellation-filters.active { display: flex; }
-        .service-btn {
-            border: 1px solid #9cb8d3;
-            border-radius: 18px;
-            padding: 6px 11px;
-            background: #f4f9ff;
-            color: #123e67;
-            font-size: 0.84em;
-            font-weight: 700;
-            cursor: pointer;
-        }
-        .service-btn.active {
-            color: #fff;
-            border-color: transparent;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        }
-        .constellation-subtle {
-            color: #c7dbf8;
-            font-size: 0.85em;
-            margin-right: 4px;
-            font-weight: 600;
-        }
-        .filter-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border: 1px solid #c6d5e4;
-            border-radius: 20px;
-            padding: 5px 10px;
-            font-size: 0.85em;
-            background: #f8fbff;
-        }
-        .filter-chip input { margin: 0; }
-        .filter-btn {
-            border: 1px solid #9cb8d3;
-            background: #eef4fa;
-            color: #123e67;
-            border-radius: 6px;
-            padding: 5px 9px;
-            cursor: pointer;
-            font-size: 0.82em;
-            font-weight: 600;
-        }
-        .filter-btn:hover { background: #ddeaf7; }
+/* ───────── CONTENT THEMES ───────── */
+.themes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);margin-top:var(--space-lg)}
+.theme-card{background:var(--pp-warm-white);border:1px solid var(--pp-border);border-radius:var(--radius-lg);padding:var(--space-md) var(--space-md) var(--space-md);transition:transform .35s,box-shadow .35s}
+.theme-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(67,27,86,0.07)}
+.theme-icon{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-sm)}
+.theme-icon svg{width:22px;height:22px;fill:none;stroke-width:1.5}
+.theme-card:nth-child(1) .theme-icon{background:rgba(113,45,144,0.1)}
+.theme-card:nth-child(1) .theme-icon svg{stroke:var(--pp-purple)}
+.theme-card:nth-child(2) .theme-icon{background:rgba(187,214,74,0.15)}
+.theme-card:nth-child(2) .theme-icon svg{stroke:#7a9c00}
+.theme-card:nth-child(3) .theme-icon{background:rgba(247,148,30,0.12)}
+.theme-card:nth-child(3) .theme-icon svg{stroke:var(--pp-orange)}
+.theme-card:nth-child(4) .theme-icon{background:rgba(106,134,158,0.15)}
+.theme-card:nth-child(4) .theme-icon svg{stroke:var(--pp-slate)}
+.theme-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;margin-bottom:0.5rem;color:var(--pp-deep)}
+.theme-card ul{list-style:none;padding:0}
+.theme-card li{font-size:0.92rem;color:var(--pp-text-light);padding:3px 0 3px 18px;position:relative}
+.theme-card li::before{content:'';position:absolute;left:0;top:11px;width:8px;height:8px;border-radius:50%;border:2px solid var(--pp-purple);opacity:0.35}
+@media(max-width:600px){.themes-grid{grid-template-columns:1fr}}
 
-    </style>
+/* ───────── FEATURE ROWS (Digital, Community, Whole School, Online) ───────── */
+.feature-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-xl);align-items:center}
+.feature-row.reverse .feature-text{order:2}
+.feature-row.reverse .feature-media{order:1}
+.feature-media{position:relative;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/3}
+.feature-media img{width:100%;height:100%;object-fit:cover}
+.feature-media .media-badge{position:absolute;bottom:16px;left:16px;background:var(--pp-purple);color:#fff;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:50px;letter-spacing:0.02em}
+.feature-text h3{font-family:var(--font-display);font-weight:600;font-size:clamp(1.4rem,2.5vw,1.8rem);color:var(--pp-deep);margin-bottom:var(--space-sm);line-height:1.25}
+.feature-text p{font-size:1rem;color:var(--pp-text-light);line-height:1.7;margin-bottom:var(--space-sm)}
+.feature-text ul{list-style:none;padding:0;margin-top:var(--space-sm)}
+.feature-text li{font-size:0.95rem;color:var(--pp-text-light);padding:6px 0 6px 26px;position:relative}
+.feature-text li::before{content:'';position:absolute;left:0;top:12px;width:14px;height:2px;background:var(--pp-orange);border-radius:2px}
+@media(max-width:768px){
+  .feature-row,.feature-row.reverse{grid-template-columns:1fr}
+  .feature-row.reverse .feature-text,.feature-row.reverse .feature-media{order:unset}
+}
+
+/* ───────── HIGHLIGHT BAND ───────── */
+.highlight-band{background:linear-gradient(135deg,var(--pp-deep) 0%,var(--pp-purple) 100%);padding:var(--space-xl) 0;position:relative;overflow:hidden}
+.highlight-band::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;opacity:0.04}
+.highlight-band .container{position:relative;z-index:1}
+.highlight-band .section-label{color:rgba(255,255,255,0.6)}
+.highlight-band .section-label::before{background:rgba(255,255,255,0.4)}
+.highlight-band .section-title{color:#fff}
+.highlight-band p{color:rgba(255,255,255,0.8)}
+.highlight-cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-lg);margin-top:var(--space-lg)}
+.highlight-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-lg);padding:var(--space-md)}
+.highlight-card h3{font-family:var(--font-display);font-weight:600;font-size:1.15rem;color:#fff;margin-bottom:0.5rem}
+.highlight-card p,.highlight-card li{font-size:0.95rem;color:rgba(255,255,255,0.75);line-height:1.65}
+.highlight-card ul{list-style:none;padding:0}
+.highlight-card li{padding:5px 0 5px 20px;position:relative}
+.highlight-card li::before{content:'';position:absolute;left:0;top:13px;width:10px;height:2px;background:var(--pp-orange);border-radius:2px}
+@media(max-width:768px){.highlight-cols{grid-template-columns:1fr}}
+
+/* ───────── CTA / DOWNLOAD ───────── */
+.download-section{text-align:center;padding:var(--space-xl) 0 var(--space-2xl)}
+.download-section .section-label{justify-content:center}
+.download-section .section-title{margin-inline:auto}
+.download-section p{color:var(--pp-text-light);max-width:520px;margin:0 auto var(--space-lg);font-size:1.05rem}
+.btn-download{display:inline-flex;align-items:center;gap:10px;background:var(--pp-purple);color:#fff;font-family:var(--font-body);font-weight:600;font-size:1rem;padding:16px 36px;border-radius:60px;border:none;cursor:pointer;transition:background .3s,transform .2s;text-decoration:none}
+.btn-download:hover{background:var(--pp-deep);transform:translateY(-2px)}
+.btn-download svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2}
+
+/* ───────── FOOTER ───────── */
+footer{background:var(--pp-deep);color:rgba(255,255,255,0.65);padding:var(--space-lg) 0;font-size:0.88rem;text-align:center}
+footer p{margin:4px 0}
+footer a{color:rgba(255,255,255,0.8)}
+footer a:hover{color:#fff}
+
+/* ───────── PRINT ───────── */
+@media print{
+  nav,.hero-arrow,.btn-download{display:none!important}
+  .hero{min-height:auto;padding:40px 0}
+  section{padding:24px 0}
+  .reveal{opacity:1!important;transform:none!important}
+  body{background:#fff;font-size:11pt}
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1>Positive Partnerships Phase 5</h1>
-        <p>Integrated Project Scope, Workshop Framework & Requirements Matrix (2026-2029)</p>
-    </header>
+<!-- ═══════ NAV ═══════ -->
+<nav id="nav" aria-label="Main navigation">
+  <div class="container nav-inner">
+    <img src="images/PP Logo.png" alt="Positive Partnerships" class="nav-logo">
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#learning-model">Learning Model</a></li>
+      <li><a href="#themes">Content</a></li>
+      <li><a href="#digital">Digital</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#download">Download</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <div class="summary-ribbon">
-        <div class="stat-card"><span class="val">7</span><span class="lbl">Service Streams</span></div>
-        <div class="stat-card"><span class="val">3 Years</span><span class="lbl">Primary Term</span></div>
-        <div class="stat-card"><span class="val">Min 20</span><span class="lbl">Equity Workshops/Yr</span></div>
-        <div class="stat-card"><span class="val">1 July 2026</span><span class="lbl">Live Launch</span></div>
+<!-- ═══════ HERO ═══════ -->
+<header class="hero" role="banner">
+  <div class="hero-bg"><img src="images/Team_Image_2025.png" alt="The Positive Partnerships national team in Sydney, 2025"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <p class="hero-brand">Positive Partnerships</p>
+    <h1>Phase 5 Plan<span>Draft strategies for consideration</span></h1>
+    <p class="hero-subtitle">Recommendations for ensuring Positive Partnerships remains agile and responsive to the needs of autistic school-aged students across Australia across 2026–2029.</p>
+    <a href="#overview" class="hero-arrow" aria-label="Scroll to content"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+  </div>
+</header>
+
+<!-- ═══════ OVERVIEW ═══════ -->
+<section id="overview">
+  <div class="container">
+    <div class="intro-grid reveal">
+      <div>
+        <p class="section-label">Overview</p>
+        <h2 class="section-title">A significant evolution in program design and delivery</h2>
+        <p class="section-prose">Phase 5 transforms how Positive Partnerships delivers evidence-based support to educators, parents, and carers of autistic school-aged students. Developed in collaboration with a variety of communities across Australia, the new model prioritises practical impact, collaborative learning, and flexible engagement.</p>
+        <p class="section-prose">All workshops move to a streamlined <strong>one-day delivery format</strong>, shifting away from the Planning Tool narrative toward core ideas and practical strategies in autism education and home-school collaboration.</p>
+      </div>
+      <div class="intro-img-wrap">
+        <img src="images/069A2585.jpg" alt="Positive Partnerships facilitators collaborating during a workshop planning session">
+        <div class="intro-img-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ THREE-STAGE LEARNING MODEL ═══════ -->
+<section id="learning-model">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Learning Model</p>
+      <h2 class="section-title">Three stages of connected learning</h2>
+      <p class="section-prose">Learning is structured across three integrated stages, creating a richer and more sustained experience for every participant.</p>
+    </div>
+    <div class="stages">
+      <!-- PRE-LEARNING -->
+      <div class="stage-card reveal">
+        <span class="stage-number">01</span>
+        <div class="stage-icon pre">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6.25a.75.75 0 0 1 .75.75v4.25H17a.75.75 0 0 1 0 1.5h-4.25V17a.75.75 0 0 1-1.5 0v-4.25H7a.75.75 0 0 1 0-1.5h4.25V7a.75.75 0 0 1 .75-.75Z"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>Pre-Learning</h3>
+        <p>Structured online pathways completed before attending workshops — moving well beyond a single introductory module. Role-specific streams ensure relevance for every participant, with micro-modules, interactive exercises, and planning templates.</p>
+        <div class="stage-tags">
+          <span class="stage-tag">Early Career Educators</span>
+          <span class="stage-tag">Teaching Assistants</span>
+          <span class="stage-tag">School Leadership</span>
+          <span class="stage-tag">Experienced Educators</span>
+          <span class="stage-tag">Parents &amp; Carers</span>
+        </div>
+      </div>
+      <!-- WORKSHOP -->
+      <div class="stage-card reveal">
+        <span class="stage-number">02</span>
+        <div class="stage-icon work">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Workshop</h3>
+        <p>One-day, collaborative sessions focused on content best engaged with alongside others. A deliberate shift from slide-based delivery toward discussion, strategy practice, and contextual exploration of autism concepts — shaped by the unique contexts participants bring.</p>
+      </div>
+      <!-- POST-LEARNING -->
+      <div class="stage-card reveal">
+        <span class="stage-number">03</span>
+        <div class="stage-icon post">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h3>Post-Learning</h3>
+        <p>Extended tools, deeper content, and communities of practice focused on implementation support. New modes of online engagement and curation ensure learning continues long after the workshop day.</p>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:var(--space-lg);border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:21/9">
+      <img src="images/GettyImages-909313786.jpeg" alt="Students and teacher collaborating with tablets in a classroom" style="width:100%;height:100%;object-fit:cover">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTENT THEMES ═══════ -->
+<section id="themes">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Workshop Content</p>
+      <h2 class="section-title">Core themes across all services</h2>
+      <p class="section-prose">Content will be authored in collaboration with Autism CRC, with a consistent structure across all Service delivery types, with key strategic differences for each audience. The following are some suggested content focal points that evolve the educational conversations had across previous phases of the program.</p>
+    </div>
+    <div class="themes-grid">
+      <div class="theme-card reveal">
+        <div class="theme-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+        </div>
+        <h3>Understanding Autistic Experience</h3>
+        <ul>
+          <li>Sensory differences</li>
+          <li>Communication styles</li>
+          <li>Cognitive processing differences</li>
+          <li>Strengths and interests</li>
+        </ul>
+        <p style="margin-top:0.8rem;font-size:0.9rem;color:var(--pp-purple);font-weight:500;font-style:italic">"Shifting from deficit thinking toward a neurodiversity perspective."</p>
+      </div>
+      <div class="theme-card reveal">
+        <div class="theme-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+        </div>
+        <h3>Universal Design for Autistic Learners</h3>
+        <ul>
+          <li>Predictable learning environments</li>
+          <li>Flexible communication options</li>
+          <li>Sensory-aware classrooms</li>
+          <li>Clear structure and expectations</li>
+        </ul>
+      </div>
+      <div class="theme-card reveal">
+        <div class="theme-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3>Practical Strategies</h3>
+        <ul>
+          <li>Visual supports</li>
+          <li>Scaffolding executive functioning</li>
+          <li>Reducing cognitive load</li>
+          <li>Supporting regulation and transitions</li>
+          <li>Working with strengths and interests</li>
+        </ul>
+      </div>
+      <div class="theme-card reveal">
+        <div class="theme-icon">
+          <svg viewBox="0 0 24 24" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+        </div>
+        <h3>Collaborative Planning</h3>
+        <ul>
+          <li>Working in partnership</li>
+          <li>Implementation planning</li>
+          <li>Home-school communication</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ DIGITAL-FIRST ═══════ -->
+<section id="digital">
+  <div class="container">
+    <div class="feature-row reveal">
+      <div class="feature-text">
+        <p class="section-label">Digital-First Resources</p>
+        <h3>From printed workbooks to ongoing digital access</h3>
+        <p>Printed participant workbooks will be discontinued in Phase 5. In their place, participants will access high-quality digital resources that support better accessibility, ongoing access to materials, and environmental sustainability.</p>
+        <p>Participants can use their own devices to access resources, but the focus during sessions will be on collaborative, small-group interaction — not screens. Digital resources will be available before and after workshops for continual learning.</p>
+      </div>
+      <div class="feature-media">
+        <img src="images/GettyImages-904531400.jpeg" alt="Teacher supporting a student using a tablet in the classroom">
+        <span class="media-badge">Digital-first</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ COMMUNITY ═══════ -->
+<section id="community" class="highlight-band">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Building Community</p>
+      <h2 class="section-title">Developing Positive Partnerships as an ongoing community</h2>
+      <p style="color:rgba(255,255,255,0.8);max-width:620px;font-size:1.05rem;line-height:1.7">Phase 5 explores new engagement formats to strengthen the brand, build community, and stay agile to the evolving needs of families and educators in the autism education space.</p>
+    </div>
+    <div class="highlight-cols">
+      <div class="highlight-card reveal">
+        <h3>Podcast &amp; Online Learning</h3>
+        <ul>
+          <li>New podcast conversations on innovation in autism and education</li>
+          <li>Online learning sessions connected to podcast content</li>
+          <li>Collaboration with key voices in the domain</li>
+        </ul>
+      </div>
+      <div class="highlight-card reveal">
+        <h3>Annual Online Conference</h3>
+        <p>A yearly Positive Partnerships online conference will bring together parents and carers, educators, and guest speakers — creating a large-scale engagement opportunity that extends well beyond regular workshops.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ WHOLE SCHOOL + ONLINE ═══════ -->
+<section id="delivery">
+  <div class="container">
+    <div class="feature-row reverse reveal">
+      <div class="feature-text">
+        <p class="section-label">Whole School Delivery</p>
+        <h3>A new structure for deeper school-level impact</h3>
+        <p>After running a Whole School workshop, the team will return to the school for additional sessions — maximising the value of travel and reducing the need for separate standalone parent workshops.</p>
+        <ul>
+          <li><strong>Day 1:</strong> Parent workshop for families at the school</li>
+          <li><strong>Day 2:</strong> Parent/Carer workshop open to the wider local community</li>
+        </ul>
+      </div>
+      <div class="feature-media">
+        <img src="images/GettyImages-538862768.jpeg" alt="Parents engaging in a workshop conversation">
+        <span class="media-badge">Whole School</span>
+      </div>
     </div>
 
-    <div class="tabs">
-        <div class="tab active" onclick="showSection('scope', this)">SERVICE SCOPE & WORKSHOPS</div>
-        <div class="tab" onclick="showSection('admin', this)">COMPLIANCE & REPORTING</div>
-        <div class="tab" onclick="showSection('timeline', this)">KEY DATES</div>
+    <div style="margin-top:var(--space-xl)"></div>
+
+    <div class="feature-row reveal">
+      <div class="feature-text">
+        <p class="section-label">Expanded Online Engagement</p>
+        <h3>Short, engaging online learning experiences</h3>
+        <p>Positive Partnerships will develop new formats for online engagement — moving beyond lecture-style webinars toward interactive, topic-based online workshops that mirror the collaborative spirit of face-to-face sessions.</p>
+      </div>
+      <div class="feature-media" style="background:linear-gradient(135deg,rgba(113,45,144,0.06),rgba(187,214,74,0.08));display:flex;align-items:center;justify-content:center;aspect-ratio:4/3;border:1px solid var(--pp-border)">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          <rect x="15" y="20" width="90" height="60" rx="6" stroke="var(--pp-purple)" stroke-width="2" opacity="0.5"/>
+          <rect x="42" y="85" width="36" height="4" rx="2" fill="var(--pp-purple)" opacity="0.3"/>
+          <circle cx="60" cy="50" r="14" stroke="var(--pp-orange)" stroke-width="2" opacity="0.6"/>
+          <polygon points="56,44 56,56 68,50" fill="var(--pp-orange)" opacity="0.5"/>
+        </svg>
+      </div>
     </div>
+  </div>
+</section>
 
-    <!-- Section 1: Scope & Workshops -->
-    <div id="scope" class="section active">
-        <div class="scope-toolbar">
-            <div class="scope-controls">
-                <button id="toggleConstellation" class="view-toggle" onclick="toggleConstellationView()">Toggle Constellation View</button>
-            </div>
-            <div id="constellationFilters" class="constellation-filters"></div>
-        </div>
-        <div class="scope-grid">
-            <!-- Services injected via JS -->
-        </div>
-        <div id="constellationWrap" class="constellation-wrap">
-            <div class="constellation-caption">Focused view: choose a service stream above to see a clean branch map.</div>
-            <svg id="constellationSvg" viewBox="0 0 1200 680" preserveAspectRatio="xMidYMid meet"></svg>
-        </div>
-    </div>
+<!-- ═══════ DOWNLOAD ═══════ -->
+<section id="download" class="download-section">
+  <div class="container reveal">
+    <p class="section-label">Resources</p>
+    <h2 class="section-title" style="text-align:center;margin-inline:auto">Download the Phase 5 Summary</h2>
+    <p>A concise overview of the Phase 5 plan for sharing with stakeholders and leadership.</p>
+    <a href="PP-Phase5-Summary.pdf" class="btn-download" download>
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download PDF
+    </a>
+  </div>
+</section>
 
-    <!-- Section 2: Admin & Compliance -->
-    <div id="admin" class="section">
-        <div class="search-bar">
-            <input type="text" id="reqSearch" placeholder="Search requirements (e.g. 'report', 'audit', 'staff')..." onkeyup="filterReqs()">
-        </div>
-        <table class="req-table" id="reqTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Category</th>
-                    <th>Requirement</th>
-                    <th>Deadline / Frequency</th>
-                    <th>Details</th>
-                </tr>
-            </thead>
-            <tbody id="reqBody">
-                <!-- CSV Data injected here -->
-            </tbody>
-        </table>
-    </div>
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="container">
+    <p style="opacity:0.6">&copy; 2026 Positive Partnerships. For internal use only.</p>
+  </div>
+</footer>
 
-    <!-- Section 3: Key Dates -->
-    <div id="timeline" class="section">
-        <div class="scope-card" style="max-width: 800px; margin: auto;">
-            <div class="scope-header">Project Lifecycle Milestones</div>
-            <div class="scope-body">
-                <h4 style="color: var(--primary); margin-top: 0;">Contract Commencement</h4>
-                <ul>
-                    <li><span class="milestone-date">Commencement Meeting:</span> Submit Draft Transition-in Plan.</li>
-                    <li><span class="milestone-date">Within 10 days of commencement:</span> Final Transition-in Plan due.</li>
-                    <li><span class="milestone-date">Within 1 month of commencement:</span> Fraud Control Plan due.</li>
-                    <li><span class="milestone-date">90 days after start:</span> Draft Annual Program Delivery Plan due.</li>
-                </ul>
-
-                <h4 style="color: var(--primary);">Year 1 Major Milestones</h4>
-                <ul>
-                    <li><span class="milestone-date">30 June 2026:</span> Website MVP Launch (core resources, foundational training, registration).</li>
-                    <li><span class="milestone-date">1 July 2026:</span> Phase 5 Operations Officially Commence.</li>
-                    <li><span class="milestone-date">31 December 2026:</span> Full Website Release (all features, 99.95% uptime requirement).</li>
-                </ul>
-
-                <h4 style="color: var(--primary);">Recurring Deadlines</h4>
-                <ul>
-                    <li><span class="milestone-date">Quarterly (within 20 days of quarter end):</span> Progress Reports & Indigenous Participation Reports due.</li>
-                    <li><span class="milestone-date">Quarterly:</span> Contract Management Meetings (teleconference or face-to-face).</li>
-                    <li><span class="milestone-date">30 April (Annual):</span> Final Annual Program Delivery Plan & Supporting Docs due.</li>
-                    <li><span class="milestone-date">20 July (Annual):</span> Annual Performance & Financial Report due.</li>
-                    <li><span class="milestone-date">Within 20 days of Milestone Completion:</span> Submit Invoices with required certifications.</li>
-                </ul>
-
-                <h4 style="color: var(--primary);">Contract Completion</h4>
-                <ul>
-                    <li><span class="milestone-date">30 June 2029:</span> Initial Completion Date.</li>
-                    <li><span class="milestone-date">Within 60 days of service delivery end:</span> Final Report due.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-</div>
-
+<!-- ═══════ SCROLL ANIMATIONS ═══════ -->
 <script>
-    const services = [{"id": "S1", "title": "Service 1: Professional Learning (PL)", "target": "Teachers, Principals, School Staff", "workshops": ["Comprehensive (1+ days)", "Targeted short sessions", "Virtual Classrooms", "Mixed-mode (Online + Workshop)", "Group training for faculty/leadership"], "key_reqs": ["Co-designed with educators & lived experience reps", "Aligned with Disability Standards for Education 2005", "Equitable distribution across all States/Territories", "Establish & facilitate Educator Community of Practice (CoP)"]}, {"id": "S2", "title": "Service 2: Parent & Carer Workshops", "target": "Parents and Carers of Autistic school-age students", "workshops": ["Comprehensive foundational training", "Transition-focused (e.g., Pre-school to Primary)", "Virtual classrooms", "Mixed-mode delivery"], "key_reqs": ["Must include weekend and after-hours options", "Focus on home-school partnerships & advocacy", "Provide post-training networking opportunities"]}, {"id": "S3", "title": "Service 3: Whole School Communities", "target": "Entire school ecosystems (Staff + Parents)", "workshops": ["Introductory leadership engagement", "Pre-training assessments", "Targeted whole-school staff PL", "Community forums (Staff + Parents)", "Champion staff training"], "key_reqs": ["Development of a formal Action Plan with milestones", "Focus on sustainable culture change & student voice", "Ongoing support & regular progress check-ins"]}, {"id": "S4", "title": "Service 4: First Nations Outreach", "target": "Aboriginal & Torres Strait Islander families/educators", "workshops": ["Co-designed targeted training sessions", "Culturally safe delivery in RRR locations"], "key_reqs": ["Min 10 targeted workshops/training per year", "Partnerships with at least 2 ACCOs per year", "Materials translated into First Nations languages as needed", "Comply with Indigenous Procurement Policy (IPP)"]}, {"id": "S5", "title": "Service 5: CALD Families", "target": "Culturally and Linguistically Diverse families", "workshops": ["Targeted sessions (migrant/refugee focus)", "Deaf community specific sessions"], "key_reqs": ["Min 10 targeted workshops/training per year", "Translation into multiple languages (incl. Auslan)", "Facilitators must have relevant CALD experience/language skills"]}, {"id": "S6", "title": "Service 6: Online & Information", "target": "Digital users, national audience", "components": ["New Program Website (MVP by 1 July 2026)", "Online Learning System (OLS) - self-paced modules", "Digital resources & webinars"], "key_reqs": ["Web Content Accessibility Guidelines (WCAG) 2.1 AA", "Secure, scalable, and modern UI/UX design", "Regular content refreshes & moderation of forums"]}, {"id": "S7", "title": "Service 7: Stakeholder Engagement", "target": "Education Authorities, Lived Experience, Sector Orgs", "components": ["Stakeholder Forums", "Communication & Promotion Plan", "Strategic partnerships"], "key_reqs": ["Proactive engagement to inform design (Services 1-5)", "Promotion across diverse media/channels", "Maintain formal feedback loops"]}];
-    const reqs = [{"ID": "REQ-001", "Category": "Reporting & Planning", "Requirement": "Submit Transition-in Plan (Draft & Final)", "Deadline/Frequency": "Draft at Commencement Meeting; Final within 10 days", "Source": "RFT Schedule 1 Item B.1.139 / Contract Schedule 1", "Details": "Must outline transition strategy, MVP website development, staffing, and resources."}, {"ID": "REQ-002", "Category": "Reporting & Planning", "Requirement": "Submit Annual Program Delivery Plan & Supporting Docs", "Deadline/Frequency": "Draft 90 days after start; Final by 30 April each year", "Source": "RFT Schedule 1 Item B.1.153 / Contract Schedule 1", "Details": "Includes Program Schedule, Data/Performance Plan, Stakeholder Plan, Quality Plan, Risk Register."}, {"ID": "REQ-003", "Category": "Reporting & Planning", "Requirement": "Submit Quarterly Progress Reports", "Deadline/Frequency": "Within 20 calendar days of quarter end", "Source": "RFT Schedule 1 Item B.1.128", "Details": "Must cover progress against plan, milestones, risks, financials, and IP updates."}, {"ID": "REQ-004", "Category": "Reporting & Planning", "Requirement": "Submit Annual Report", "Deadline/Frequency": "By 20 July each year", "Source": "RFT Schedule 1 Item B.1.128", "Details": "Summary of annual performance, financial acquittal, and updated plans for next year."}, {"ID": "REQ-005", "Category": "Reporting & Planning", "Requirement": "Submit Indigenous Participation Report", "Deadline/Frequency": "Quarterly & End of Term", "Source": "Contract Clause 22 / RFT Schedule 1 Item B.1.128", "Details": "Report via IPPRS on compliance with Indigenous Participation Plan and MMR targets."}, {"ID": "REQ-006", "Category": "Reporting & Planning", "Requirement": "Submit Final Report", "Deadline/Frequency": "Within 60 days of service delivery end", "Source": "RFT Schedule 1 Item B.1.135", "Details": "Comprehensive summary of entire contract period performance."}, {"ID": "REQ-007", "Category": "Reporting & Planning", "Requirement": "Attend Contract Management Meetings", "Deadline/Frequency": "Quarterly", "Source": "RFT Schedule 1 Item B.1.128", "Details": "Teleconference or face-to-face as agreed."}, {"ID": "REQ-008", "Category": "Service Delivery Targets", "Requirement": "Target: Professional Learning (Teachers/Staff)", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "Deliver to 12,000 teachers, principals, and school staff."}, {"ID": "REQ-009", "Category": "Service Delivery Targets", "Requirement": "Target: Parent/Carer Workshops", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "Deliver to 3,000 parents and carers."}, {"ID": "REQ-010", "Category": "Service Delivery Targets", "Requirement": "Target: Whole School Engagement", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "15 schools in Year 1; 20 schools/year thereafter. Min 3 workshops per school + 12 months support."}, {"ID": "REQ-011", "Category": "Service Delivery Targets", "Requirement": "Target: First Nations Training", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "Minimum 10 sessions. At least 60% in regional/remote locations."}, {"ID": "REQ-012", "Category": "Service Delivery Targets", "Requirement": "Target: ACCO Partnerships", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "Formal agreements with minimum 2 Aboriginal Community-Controlled Organisations."}, {"ID": "REQ-013", "Category": "Service Delivery Targets", "Requirement": "Target: CALD Workshops", "Deadline/Frequency": "Annually", "Source": "RFT Attachment A (Annual Delivery Targets)", "Details": "Minimum 10 targeted sessions for CALD communities."}, {"ID": "REQ-014", "Category": "IT & Website", "Requirement": "Launch Website MVP", "Deadline/Frequency": "By 30 June 2026", "Source": "RFT Schedule 1 Item B.1.136", "Details": "Must include core resources, foundational training modules, and registration functionality."}, {"ID": "REQ-015", "Category": "IT & Website", "Requirement": "Full Website Release", "Deadline/Frequency": "By 31 December 2026", "Source": "RFT Schedule 1 Item C (Milestones)", "Details": "All planned features live. 99.95% uptime requirement. Hosted in Australia."}, {"ID": "REQ-016", "Category": "IT & Website", "Requirement": "Website Accessibility", "Deadline/Frequency": "Ongoing", "Source": "Contract Clause 28.2 / RFT Schedule 1 Item B.1.91", "Details": "Must comply with WCAG 2.1 Level AA and Digital Service Standards."}, {"ID": "REQ-017", "Category": "IT & Website", "Requirement": "Resource Translation", "Deadline/Frequency": "Ongoing", "Source": "RFT Schedule 1 Item B.1.119", "Details": "Translate frequently accessed resources into at least 15 community languages."}, {"ID": "REQ-018", "Category": "IT & Website", "Requirement": "Cyber Security Compliance", "Deadline/Frequency": "Ongoing", "Source": "Contract Clause 10 / RFT Schedule 1 Item B.1.94", "Details": "Comply with PSPF, ISM, Essential Eight. No offshore data without approval."}, {"ID": "REQ-019", "Category": "Financial & Admin", "Requirement": "Submit Invoices", "Deadline/Frequency": "Within 20 days of Milestone Completion", "Source": "Contract Schedule 1 Item 6", "Details": "Must include Tax Invoice requirements and certification of payment to subs/personnel."}, {"ID": "REQ-020", "Category": "Financial & Admin", "Requirement": "Maintain Insurance", "Deadline/Frequency": "Ongoing", "Source": "Contract Clause 28.7 / Schedule 1 Item 20", "Details": "Public Liability ($10M), Professional Indemnity ($5M), Workers Comp."}, {"ID": "REQ-021", "Category": "Financial & Admin", "Requirement": "Participant Travel Costs", "Deadline/Frequency": "As incurred", "Source": "RFT Schedule 1 Item B.1.123", "Details": "Pay for rural/remote school staff travel if employer funding unavailable. Do NOT pay for parents."}, {"ID": "REQ-022", "Category": "Financial & Admin", "Requirement": "Statement of Tax Record", "Deadline/Frequency": "Ongoing / Annual", "Source": "Contract Clause 24", "Details": "Maintain Valid and Satisfactory STR. Ensure subs >$4M also hold one."}, {"ID": "REQ-023", "Category": "Staffing & Legal", "Requirement": "Working with Children Checks", "Deadline/Frequency": "Ongoing", "Source": "Contract Clause 28.3", "Details": "Mandatory for all personnel interacting with children."}, {"ID": "REQ-024", "Category": "Staffing & Legal", "Requirement": "Fraud Control Plan", "Deadline/Frequency": "Within 1 month of commencement", "Source": "Contract Schedule 1 Item 19", "Details": "Consistent with Commonwealth Fraud Control Framework."}, {"ID": "REQ-025", "Category": "Staffing & Legal", "Requirement": "Conflict of Interest", "Deadline/Frequency": "Immediate notification", "Source": "Contract Clause 28.9", "Details": "Notify Dept immediately if any conflict arises. Maintain register."}, {"ID": "REQ-026", "Category": "Staffing & Legal", "Requirement": "Intellectual Property Register", "Deadline/Frequency": "Quarterly & Annual", "Source": "RFT Schedule 1 Item B.1.171", "Details": "Maintain register of all Contract Material and Existing Material."}, {"ID": "REQ-027", "Category": "Staffing & Legal", "Requirement": "Social Media Moderation", "Deadline/Frequency": "Ongoing", "Source": "RFT Schedule 1 Item B.1.80", "Details": "Monitor and moderate comments. Align with Dept Social Media Policy."}];
+(function(){
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, {passive: true});
 
-    let constellationMode = false;
-    let selectedServiceId = services[0].id;
-    const streamColors = ["#4cc9f0", "#89fc00", "#f9c74f", "#f9844a", "#f72585", "#9b5de5", "#43aa8b"];
-
-    function showSection(id, tabEl) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        tabEl.classList.add('active');
-    }
-
-    // Render Services
-    const scopeGrid = document.querySelector('.scope-grid');
-    services.forEach(s => {
-        const card = document.createElement('div');
-        card.className = 'scope-card';
-        let workshopsHtml = s.workshops ? `<h4>Workshop Modalities</h4><ul>${s.workshops.map(w => `<li>${w}</li>`).join('')}</ul>` : '';
-        let componentsHtml = s.components ? `<h4>Key Components</h4><ul>${s.components.map(c => `<li>${c}</li>`).join('')}</ul>` : '';
-        
-        card.innerHTML = `
-            <div class="scope-header">${s.title}</div>
-            <div class="scope-body">
-                <span class="tag">Target: ${s.target}</span>
-                ${workshopsHtml}
-                ${componentsHtml}
-                <h4>Core Delivery Requirements</h4>
-                <ul>${s.key_reqs.map(r => `<li>${r}</li>`).join('')}</ul>
-            </div>
-        `;
-        scopeGrid.appendChild(card);
+  // Close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.remove('open');
     });
-    initConstellationFilters();
+  });
 
-    function toggleConstellationView() {
-        constellationMode = !constellationMode;
-        document.querySelector('.scope-grid').classList.toggle('hidden', constellationMode);
-        document.getElementById('constellationWrap').classList.toggle('active', constellationMode);
-        document.getElementById('constellationFilters').classList.toggle('active', constellationMode);
-        document.getElementById('toggleConstellation').textContent = constellationMode
-            ? 'Back to Card View'
-            : 'Toggle Constellation View';
-        if (constellationMode) renderConstellation();
-    }
-
-    function initConstellationFilters() {
-        const wrap = document.getElementById('constellationFilters');
-        wrap.innerHTML = `<span class="constellation-subtle">Focus stream:</span>`;
-        services.forEach((s, i) => {
-            const chip = document.createElement('button');
-            chip.className = `service-btn ${s.id === selectedServiceId ? 'active' : ''}`;
-            chip.dataset.serviceId = s.id;
-            chip.style.borderColor = streamColors[i % streamColors.length];
-            chip.style.background = s.id === selectedServiceId ? streamColors[i % streamColors.length] : '#f4f9ff';
-            chip.textContent = s.id;
-            chip.onclick = () => setFocusedService(s.id);
-            wrap.appendChild(chip);
-        });
-    }
-
-    function setFocusedService(id) {
-        selectedServiceId = id;
-        initConstellationFilters();
-        if (constellationMode) renderConstellation();
-    }
-
-    function getLabelLines(text, maxChars = 34, maxLines = 3) {
-        const words = text.split(' ');
-        const lines = [];
-        let current = '';
-        for (let i = 0; i < words.length; i++) {
-            const test = current ? `${current} ${words[i]}` : words[i];
-            if (test.length <= maxChars) {
-                current = test;
-            } else {
-                if (current) lines.push(current);
-                current = words[i];
-                if (lines.length === maxLines - 1) break;
-            }
+  // Intersection Observer for reveal animations
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
         }
-        if (lines.length < maxLines && current) lines.push(current);
-        if (lines.length > maxLines) lines.length = maxLines;
-        if (lines.length === maxLines && words.join(' ').length > lines.join(' ').length) {
-            lines[maxLines - 1] = `${lines[maxLines - 1].slice(0, Math.max(0, maxChars - 1))}…`;
-        }
-        return lines;
-    }
-
-    function renderConstellation() {
-        const svg = document.getElementById('constellationSvg');
-        svg.innerHTML = '';
-        const NS = 'http://www.w3.org/2000/svg';
-        const service = services.find(s => s.id === selectedServiceId) || services[0];
-        const colorIndex = services.findIndex(s => s.id === service.id);
-        const streamColor = streamColors[colorIndex % streamColors.length];
-
-        const allItems = [
-            ...(service.workshops || []).map(text => ({ text, group: 'Workshop' })),
-            ...(service.components || []).map(text => ({ text, group: 'Component' })),
-            ...(service.key_reqs || []).map(text => ({ text, group: 'Requirement' }))
-        ];
-
-        const leftX = 160;
-        const midX = 420;
-        const itemX = 760;
-        const top = 100;
-        const bottom = 600;
-        const step = allItems.length > 1 ? (bottom - top) / (allItems.length - 1) : 0;
-
-        function addCircle(x, y, r, fill, cls) {
-            const c = document.createElementNS(NS, 'circle');
-            c.setAttribute('cx', x);
-            c.setAttribute('cy', y);
-            c.setAttribute('r', r);
-            c.setAttribute('fill', fill);
-            c.setAttribute('class', cls || '');
-            c.setAttribute('stroke', 'rgba(255,255,255,0.7)');
-            c.setAttribute('stroke-width', '1.5');
-            svg.appendChild(c);
-            return c;
-        }
-
-        function addText(x, y, text, anchor = 'middle', size = 12, weight = 600, color = '#e8f2ff') {
-            const t = document.createElementNS(NS, 'text');
-            t.setAttribute('x', x);
-            t.setAttribute('y', y);
-            t.setAttribute('text-anchor', anchor);
-            t.setAttribute('fill', color);
-            t.setAttribute('font-size', String(size));
-            t.setAttribute('font-weight', String(weight));
-            t.setAttribute('font-family', '"Trebuchet MS", "Segoe UI", Tahoma, sans-serif');
-            t.textContent = text;
-            svg.appendChild(t);
-            return t;
-        }
-
-        function addPath(d, stroke, width = 1.5) {
-            const p = document.createElementNS(NS, 'path');
-            p.setAttribute('d', d);
-            p.setAttribute('fill', 'none');
-            p.setAttribute('stroke', stroke);
-            p.setAttribute('stroke-width', String(width));
-            p.setAttribute('stroke-linecap', 'round');
-            svg.appendChild(p);
-            return p;
-        }
-
-        addCircle(leftX, 340, 16, '#ffe8a3');
-        addText(leftX, 318, 'Phase 5 Core', 'middle', 13, 700);
-        addCircle(midX, 340, 15, streamColor);
-        addText(midX, 314, service.id, 'middle', 14, 700);
-        addText(midX, 365, service.title.replace('Service ', ''), 'middle', 12, 600);
-
-        addPath(`M ${leftX + 20} 340 C ${leftX + 130} 340, ${midX - 130} 340, ${midX - 20} 340`, 'rgba(183, 215, 255, 0.6)', 2.2);
-
-        allItems.forEach((item, i) => {
-            const x = itemX;
-            const y = top + i * step;
-
-            addPath(
-                `M ${midX + 18} 340 C ${midX + 130} 340, ${x - 90} ${y}, ${x - 12} ${y}`,
-                'rgba(183, 215, 255, 0.42)',
-                1.35
-            );
-            addCircle(x, y, 7, streamColor);
-
-            const lines = getLabelLines(`${item.group}: ${item.text}`);
-            const label = document.createElementNS(NS, 'text');
-            label.setAttribute('x', x + 12);
-            label.setAttribute('y', lines.length > 1 ? y - 8 : y + 4);
-            label.setAttribute('text-anchor', 'start');
-            label.setAttribute('fill', '#e8f2ff');
-            label.setAttribute('font-size', '11');
-            label.setAttribute('font-family', '"Trebuchet MS", "Segoe UI", Tahoma, sans-serif');
-            lines.forEach((line, idx) => {
-                const span = document.createElementNS(NS, 'tspan');
-                span.textContent = line;
-                span.setAttribute('x', x + 12);
-                span.setAttribute('dy', idx === 0 ? 0 : 12);
-                label.appendChild(span);
-            });
-            const tooltip = document.createElementNS(NS, 'title');
-            tooltip.textContent = `${item.group}: ${item.text}`;
-            label.appendChild(tooltip);
-            svg.appendChild(label);
-        });
-    }
-
-    // Render Requirements Table
-    const reqBody = document.getElementById('reqBody');
-    reqs.forEach(r => {
-        const row = document.createElement('tr');
-        const catClass = r.Category.toLowerCase().includes('report') ? 'cat-report' : 
-                         r.Category.toLowerCase().includes('staff') ? 'cat-staff' : 'cat-financial';
-        row.innerHTML = `
-            <td>${r.ID}</td>
-            <td><span class="cat-tag ${catClass}">${r.Category}</span></td>
-            <td><strong>${r.Requirement}</strong></td>
-            <td>${r.Deadline || r['Deadline/Frequency']}</td>
-            <td>${r.Details}</td>
-        `;
-        reqBody.appendChild(row);
-    });
-
-    function filterReqs() {
-        const input = document.getElementById('reqSearch').value.toLowerCase();
-        const rows = document.getElementById('reqBody').getElementsByTagName('tr');
-        for (let row of rows) {
-            row.style.display = row.innerText.toLowerCase().includes(input) ? '' : 'none';
-        }
-    }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => obs.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('visible'));
+  }
+})();
 </script>
-
 </body>
 </html>

@@ -172,6 +172,32 @@
         }
         .filter-btn:hover { background: #ddeaf7; }
 
+        /* KPI Tab */
+        .target-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 30px; }
+        .target-card { background: white; border-radius: 8px; border: 1px solid var(--border); padding: 16px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .target-card .target-val { font-size: 1.6em; font-weight: bold; color: var(--primary); display: block; margin-bottom: 2px; }
+        .target-card .target-svc { font-size: 0.78em; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; display: block; }
+        .target-card .target-lbl { font-size: 0.88em; color: #555; }
+        .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 14px; }
+        .kpi-tile { background: white; border-radius: 10px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .kpi-tile-head { padding: 14px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+        .kpi-tile-head:hover { background: #f4f7fa; }
+        .kpi-badge { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95em; color: white; flex-shrink: 0; }
+        .kpi-tile-head h4 { margin: 0; font-size: 1em; color: var(--primary); }
+        .kpi-tile-head p { margin: 2px 0 0; font-size: 0.82em; color: #888; }
+        .kpi-chevron { margin-left: auto; font-size: 1.2em; color: #aaa; transition: transform 0.25s; flex-shrink: 0; }
+        .kpi-tile.open .kpi-chevron { transform: rotate(180deg); }
+        .kpi-tile-body { display: none; border-top: 1px solid #eee; }
+        .kpi-tile.open .kpi-tile-body { display: block; }
+        .measure-row { padding: 14px 16px; border-bottom: 1px solid #f2f2f2; }
+        .measure-row:last-child { border-bottom: none; }
+        .measure-name { font-weight: 700; color: var(--primary); font-size: 0.95em; margin-bottom: 4px; }
+        .measure-desc { font-size: 0.9em; color: #555; margin-bottom: 10px; line-height: 1.5; }
+        .measure-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+        .meta-chip { display: inline-flex; align-items: center; gap: 5px; background: #f0f4f8; border-radius: 6px; padding: 5px 10px; font-size: 0.8em; color: #444; }
+        .meta-chip .meta-icon { font-size: 1em; flex-shrink: 0; }
+        .meta-chip strong { color: var(--primary); font-weight: 600; }
+
     </style>
 </head>
 <body>
@@ -237,23 +263,45 @@
     <!-- Section 3½: Performance & KPIs (Attachment A) -->
     <div id="kpis" class="section">
         <h3 style="color:var(--primary);margin-bottom:6px;">Annual Delivery Targets</h3>
-        <p style="font-size:0.95em;color:#666;margin-bottom:16px;">Minimum annual targets to be reported against quarterly and annually, as per Attachment A.</p>
-        <table class="req-table">
-            <thead><tr><th>Service</th><th>Annual Delivery Target</th></tr></thead>
-            <tbody>
-                <tr><td><strong>Professional Learning</strong> (S1, S3, S6)</td><td>12,000 teachers, principals and other school staff</td></tr>
-                <tr><td><strong>Parent / Carer Workshops</strong> (S2–S6)</td><td>3,000 parents and carers</td></tr>
-                <tr><td><strong>Whole School Services</strong> (S3)</td><td>Min 15 school communities in Year 1; 20+ annually from Year 2. Engagement assessed as delivery of at least 3 workshops per school with evidence of sustained support over 12 months.</td></tr>
-                <tr><td><strong>First Nations Targeted Training</strong> (S4B)</td><td>Min 10 targeted sessions, with at least 60% in regional or remote locations</td></tr>
-                <tr><td><strong>Partnerships with ACCOs</strong> (S4C)</td><td>Min 2 partnerships formally agreed with ACCOs</td></tr>
-                <tr><td><strong>CALD Communities</strong> (S5)</td><td>Min 10 targeted training sessions</td></tr>
-            </tbody>
-        </table>
+        <p style="font-size:0.92em;color:#666;margin-bottom:16px;">Minimum annual targets as per Attachment A. Click any KPI below to expand its measures.</p>
 
-        <h3 style="color:var(--primary);margin-top:30px;margin-bottom:6px;">Key Performance Indicators</h3>
-        <p style="font-size:0.95em;color:#666;margin-bottom:16px;">KPIs and measures to be formalised in the Data, Performance and Continuous Improvement Plan, aligned with the department's Program Performance Management Framework.</p>
+        <div class="target-cards">
+            <div class="target-card">
+                <span class="target-val">12,000</span>
+                <span class="target-svc">S1, S3, S6</span>
+                <span class="target-lbl">Teachers &amp; school staff</span>
+            </div>
+            <div class="target-card">
+                <span class="target-val">3,000</span>
+                <span class="target-svc">S2–S6</span>
+                <span class="target-lbl">Parents &amp; carers</span>
+            </div>
+            <div class="target-card">
+                <span class="target-val">15 / 20+</span>
+                <span class="target-svc">S3 Whole School</span>
+                <span class="target-lbl">School communities (Yr 1 / Yr 2+)</span>
+            </div>
+            <div class="target-card">
+                <span class="target-val">10</span>
+                <span class="target-svc">S4B First Nations</span>
+                <span class="target-lbl">Sessions (60%+ regional/remote)</span>
+            </div>
+            <div class="target-card">
+                <span class="target-val">2</span>
+                <span class="target-svc">S4C ACCOs</span>
+                <span class="target-lbl">Formal partnerships</span>
+            </div>
+            <div class="target-card">
+                <span class="target-val">10</span>
+                <span class="target-svc">S5 CALD</span>
+                <span class="target-lbl">Targeted sessions</span>
+            </div>
+        </div>
 
-        <div class="scope-grid" id="kpiGrid"></div>
+        <h3 style="color:var(--primary);margin-bottom:6px;">Key Performance Indicators</h3>
+        <p style="font-size:0.92em;color:#666;margin-bottom:16px;">Aligned with the department's Program Performance Management Framework.</p>
+
+        <div class="kpi-strip" id="kpiStrip"></div>
     </div>
 
     <!-- Section 3: Key Dates -->
@@ -523,28 +571,41 @@
         }
     ];
 
-    // Render KPI cards
-    const kpiGrid = document.getElementById('kpiGrid');
-    kpis.forEach(kpi => {
-        const card = document.createElement('div');
-        card.className = 'scope-card';
-        card.innerHTML = `
-            <div class="scope-header">${kpi.id} — ${kpi.title}</div>
-            <div class="scope-body">
-                <p style="font-size:0.93em;color:#555;margin-bottom:12px;">${kpi.desc}</p>
+    // Render KPI tiles
+    const kpiBadgeColors = ['#006699', '#27ae60', '#e67e22', '#8e44ad'];
+    const kpiStrip = document.getElementById('kpiStrip');
+    kpis.forEach((kpi, idx) => {
+        const tile = document.createElement('div');
+        tile.className = 'kpi-tile';
+        const num = idx + 1;
+        const measCount = kpi.measures.length;
+        tile.innerHTML = `
+            <div class="kpi-tile-head" onclick="this.parentElement.classList.toggle('open')" aria-expanded="false" role="button" tabindex="0">
+                <div class="kpi-badge" style="background:${kpiBadgeColors[idx]}">${num}</div>
+                <div>
+                    <h4>${kpi.title}</h4>
+                    <p>${measCount} measure${measCount > 1 ? 's' : ''}</p>
+                </div>
+                <span class="kpi-chevron" aria-hidden="true">&#9662;</span>
+            </div>
+            <div class="kpi-tile-body" role="region">
                 ${kpi.measures.map(m => `
-                    <h4>${m.name}</h4>
-                    <ul>
-                        <li><strong>Description:</strong> ${m.desc}</li>
-                        <li><strong>Calculation:</strong> ${m.calc}</li>
-                        <li><strong>Min Performance Level:</strong> ${m.minLevel}</li>
-                        <li><strong>Reporting Frequency:</strong> ${m.freq}</li>
-                        <li><strong>Data Source:</strong> ${m.source}</li>
-                    </ul>
+                    <div class="measure-row">
+                        <div class="measure-name">${m.name}</div>
+                        <div class="measure-desc">${m.desc}</div>
+                        <div class="measure-meta">
+                            <span class="meta-chip"><span class="meta-icon">&#128200;</span> <strong>Target:</strong> ${m.minLevel.length > 80 ? m.minLevel.slice(0, 77) + '...' : m.minLevel}</span>
+                            <span class="meta-chip"><span class="meta-icon">&#128197;</span> ${m.freq.split('.')[0]}</span>
+                            <span class="meta-chip"><span class="meta-icon">&#128202;</span> ${m.source.split('.')[0]}</span>
+                        </div>
+                    </div>
                 `).join('')}
             </div>
         `;
-        kpiGrid.appendChild(card);
+        tile.querySelector('.kpi-tile-head').addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tile.classList.toggle('open'); }
+        });
+        kpiStrip.appendChild(tile);
     });
 
     // Render Requirements Table

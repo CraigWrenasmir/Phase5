@@ -161,6 +161,31 @@ section:nth-child(even){background:var(--pp-warm-white)}
 .highlight-card li::before{content:'';position:absolute;left:0;top:13px;width:10px;height:2px;background:var(--pp-orange);border-radius:2px}
 @media(max-width:768px){.highlight-cols{grid-template-columns:1fr}}
 
+/* ───────── PERFORMANCE MONITORING ───────── */
+.targets-table{width:100%;border-collapse:separate;border-spacing:0;margin-top:var(--space-lg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--pp-border)}
+.targets-table th,.targets-table td{padding:14px 20px;text-align:left;font-size:0.95rem;line-height:1.55}
+.targets-table thead th{background:var(--pp-purple);color:#fff;font-family:var(--font-display);font-weight:600;font-size:0.9rem;letter-spacing:0.02em}
+.targets-table tbody tr{background:var(--pp-warm-white);transition:background .2s}
+.targets-table tbody tr:nth-child(even){background:rgba(113,45,144,0.03)}
+.targets-table tbody tr:hover{background:rgba(113,45,144,0.06)}
+.targets-table td:first-child{font-weight:600;color:var(--pp-deep);white-space:nowrap}
+.targets-table td:last-child{color:var(--pp-text-light)}
+@media(max-width:768px){
+  .targets-table td:first-child{white-space:normal}
+  .targets-table th,.targets-table td{padding:10px 14px;font-size:0.88rem}
+}
+.kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-md);margin-top:var(--space-lg)}
+.kpi-card{background:var(--pp-warm-white);border:1px solid var(--pp-border);border-radius:var(--radius-lg);padding:var(--space-md);transition:transform .35s,box-shadow .35s}
+.kpi-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(67,27,86,0.07)}
+.kpi-number{font-family:var(--font-display);font-weight:700;font-size:2rem;color:var(--pp-purple);opacity:0.15;margin-bottom:0.25rem}
+.kpi-card h3{font-family:var(--font-display);font-weight:600;font-size:1.1rem;color:var(--pp-deep);margin-bottom:0.5rem}
+.kpi-card .kpi-desc{font-size:0.92rem;color:var(--pp-text-light);line-height:1.65;margin-bottom:var(--space-sm)}
+.kpi-card .kpi-measures{list-style:none;padding:0}
+.kpi-card .kpi-measures li{font-size:0.88rem;color:var(--pp-text-light);padding:5px 0 5px 20px;position:relative}
+.kpi-card .kpi-measures li::before{content:'';position:absolute;left:0;top:12px;width:10px;height:2px;background:var(--pp-orange);border-radius:2px}
+.kpi-card .kpi-measures strong{color:var(--pp-deep);font-weight:600}
+@media(max-width:768px){.kpi-grid{grid-template-columns:1fr}}
+
 /* ───────── CTA / DOWNLOAD ───────── */
 .download-section{text-align:center;padding:var(--space-xl) 0 var(--space-2xl)}
 .download-section .section-label{justify-content:center}
@@ -202,6 +227,7 @@ footer a:hover{color:#fff}
       <li><a href="#digital">Digital</a></li>
       <li><a href="#community">Community</a></li>
       <li><a href="#delivery">Delivery</a></li>
+      <li><a href="#performance">Performance</a></li>
       <li><a href="#download">Download</a></li>
     </ul>
   </div>
@@ -424,6 +450,71 @@ footer a:hover{color:#fff}
           <circle cx="60" cy="50" r="14" stroke="var(--pp-orange)" stroke-width="2" opacity="0.6"/>
           <polygon points="56,44 56,56 68,50" fill="var(--pp-orange)" opacity="0.5"/>
         </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PERFORMANCE MONITORING ═══════ -->
+<section id="performance">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Performance Monitoring</p>
+      <h2 class="section-title">Annual delivery targets &amp; key performance indicators</h2>
+      <p class="section-prose">Attachment A sets out the annual delivery targets and KPIs that will be formalised in the Data, Performance and Continuous Improvement Plan, aligned with the department's Program Performance Management Framework.</p>
+    </div>
+
+    <table class="targets-table reveal">
+      <thead>
+        <tr><th>Service</th><th>Annual Delivery Target</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Professional Learning (S1, S3, S6)</td><td>12,000 teachers, principals and other school staff</td></tr>
+        <tr><td>Parent / Carer Workshops (S2–S6)</td><td>3,000 parents and carers</td></tr>
+        <tr><td>Whole School Services (S3)</td><td>Minimum 15 school communities in Year 1; 20+ annually from Year 2. Engagement assessed as delivery of at least 3 workshops per school with evidence of sustained support over 12 months.</td></tr>
+        <tr><td>First Nations Targeted Training (S4B)</td><td>Minimum 10 targeted sessions, with at least 60% in regional or remote locations</td></tr>
+        <tr><td>Partnerships with ACCOs (S4C)</td><td>Minimum 2 partnerships formally agreed with ACCOs</td></tr>
+        <tr><td>CALD Communities (S5)</td><td>Minimum 10 targeted training sessions</td></tr>
+      </tbody>
+    </table>
+
+    <div class="kpi-grid">
+      <div class="kpi-card reveal">
+        <div class="kpi-number">KPI 1</div>
+        <h3>Service Effectiveness</h3>
+        <p class="kpi-desc">Effectiveness at designing and delivering services that support families and educators to work in partnership for autistic school-age students.</p>
+        <ul class="kpi-measures">
+          <li><strong>Educator Capability</strong> — Increased knowledge, skills and confidence to support autistic students (pre/post survey)</li>
+          <li><strong>Parent/Carer Capability</strong> — Increased knowledge about autism and confidence in engaging with schools</li>
+          <li><strong>Whole School Capability</strong> — Substantial increase in effective support of autistic students across school communities</li>
+        </ul>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-number">KPI 2</div>
+        <h3>Service Quality</h3>
+        <p class="kpi-desc">Professional learning meets teacher regulatory authority accreditation requirements across all states and territories.</p>
+        <ul class="kpi-measures">
+          <li><strong>Quality of Professional Learning</strong> — All sessions, online modules and workshops meet formal requirements for accreditation and/or recognition</li>
+          <li>Reported quarterly under the Contract Material Register</li>
+        </ul>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-number">KPI 3</div>
+        <h3>Stakeholder Engagement</h3>
+        <p class="kpi-desc">Quality and effectiveness of engagement and promotional activities to improve delivery and increase participation.</p>
+        <ul class="kpi-measures">
+          <li><strong>Stakeholder Engagement</strong> — Regular, proactive and productive engagement with relevant stakeholders; feedback incorporated into outputs</li>
+          <li><strong>Partnership with ACCOs</strong> — Partnerships that build capacity for both provider and ACCOs, ensuring culturally safe content and delivery</li>
+        </ul>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="kpi-number">KPI 4</div>
+        <h3>Access &amp; Inclusion</h3>
+        <p class="kpi-desc">Accessibility of the program, adherence to standards, and culturally safe services for priority cohorts including First Nations and CALD communities.</p>
+        <ul class="kpi-measures">
+          <li><strong>Equitable Delivery</strong> — National, sector-wide delivery with equitable distribution across all states, territories, and education sectors</li>
+          <li><strong>Accessible &amp; Culturally Safe</strong> — Services meet ICT accessibility requirements; key cohorts report services are accessible and culturally safe</li>
+        </ul>
       </div>
     </div>
   </div>
